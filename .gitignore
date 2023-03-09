@@ -1,0 +1,169 @@
+# from operator import index
+import numpy as np
+# import datetime
+import pandas as pd
+# from collections import Counter
+# import openpyxl
+# import rating as rating
+# from pandas import DataFrame
+
+pandas_calc = {'plus': lambda x, y: x+y,
+  'minus': lambda x, y : x - y,
+  'multiplication': lambda x, y: x ** y,
+  'divide': lambda x, y: x//y
+}
+print(pandas_calc['divide'](12,12))
+
+# # excel_data_df: DataFrame = pd.read_excel('data.xlsx')
+# # print(excel_data_df.columns.ravel())
+# # excel_data_df2 = pd.read_excel('data.xlsx', sheet_name='ZZ_DEP_CLIENT', usecols=['ZZ_PRICE '])
+# # print(excel_data_df2)
+# # excel_data_df["year_month"] = excel_data_df["ZZ_FROM_DATE"].dt.to_period("M")
+#
+#
+# ## a = excel_data_df.replace('444 ', '50 мм', inplace=True)
+# # print(excel_data_df)
+# #DataFrame['column_name'].where(~(condition), other=new_value, inplace=True)
+# # Источник: https://tonais.ru/library/zamena-odnogo-ili-neskolkih-znacheniy-v-stolbtse-v-dataframe
+# # print(excel_data_df['TYPE'])
+# # excel_data_df.shape
+#
+#
+# # ['01','50 мм'],['02','75 мм'], ['03','125 мм'],['04','175 мм'],['05','300 мм'],['06','60 мм'],['07','110 мм']
+# # df['TYPE'].where(~(df.TYPE == 4), other='175 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 2), other='75 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 1), other='50 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 3), other='125 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 5), other='300 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 6), other='60 мм', inplace=True)
+# # df['TYPE'].where(~(df.TYPE == 7), other='110 мм', inplace=True)
+#
+#
+#
+# # print(df.TYPE)
+# # excel_data_df.loc[1] = ['444', 'MUSAYEV SHAXZOD', '1459', '175 мм', '20200811', '20210811', '31304,35', '4695,65', '36000', '2023.02.11']
+# # print(excel_data_df[:4])
+# # concated = pd.concat([excel_data_df])
+# # print(excel_data_df[' ZZ_PRICE'].sum())
+# # data.loc[3, ['Price']] = [65]
+# # excel_data_df.loc[3, ['ZZ_FROM_DATE']] = ['2023.02.04']
+# # print(excel_data_df[:4])
+#
+# # SQL update след таблица
+# # excel_data_df.loc[3, ['ZZ_FROM_DATE']]= ['2023.02.04']
+#
+# # след команда типа SQL select * from table_name where ZZ_VAT_PRICE!='36000'
+# # print(excel_data_df[(excel_data_df. ZZ_VAT_PRICE!='36000' )])
+# # print(excel_data_df['ZZ_PRICE'])
+# # excel_data_df.at[index, [01] ]
+# # print(excel_data_df)
+# # print(excel_data_df[:4])
+# # price = concated[concated['ZZ_PRICE']>50]
+# # print(price['ZZ_PRICE'].sum)
+# # procent = df.ZZ_PRICE_WITHOUT
+# # new_table = (procent/100 * 12)
+# # print(new_table)
+# # print(df.ZZ_CONT_DATE)
+#
+# # df['ZZ_FROM_DATE'].where(~(df.ZZ_FROM_DATE == 20230201), other='2023.02.01', inplace=True)
+#
+# df = pd.read_excel('data2.xlsx', dtype={'ZZ_BRANCH': object,
+#                                             'ZZ_FROM_DATE': object,
+#                                                 'ZZ_CONT_DATE': object,
+#                                                     'ZZ_CONT_END_DATE': object})
+#
+# def toHuman(row):
+#     return row[6:] + '/' + row[4:6] + '/' + row[:4]
+#
+#
+# df['ZZ_FROM_DATE'] = df['ZZ_FROM_DATE'].apply(lambda x: toHuman(x))
+#
+#
+# def cont_date(row):
+#     return row[6:] + '/' + row[4:6] + '/' + row[:4]
+#
+# df['ZZ_CONT_DATE'] = df['ZZ_CONT_DATE'].apply(lambda x: cont_date(x))
+#
+# def  cont_end(row):
+#     return row[6:] + '/' + row[4:6] + '/' + row[:4]
+#
+# df['ZZ_CONT_END_DATE'] = df['ZZ_CONT_END_DATE'].apply(lambda x: cont_date(x))
+#
+#
+#
+# new_db = pd.DataFrame({'TYPE': [1,2,3,4,5,6,7],
+#                         'размер ячейки мм': ['50 мм', '75 мм', '125 мм', '175 мм', '300 мм', '60 мм', '110 мм']})
+#
+#
+# def about_price():
+#     procent_price = (df.ZZ_PRICE/100 * 12)
+#     new_price = df.ZZ_PRICE - procent_price
+#     return new_price
+# df['ZZ_PRICE'] = about_price()
+#
+# def zz_vat_price():
+#     procent_price = (df.ZZ_VAT_PRICE / 100 * 12)
+#     new_price = df.ZZ_VAT_PRICE - procent_price
+#     return new_price
+# df['ZZ_VAT_PRICE'] = zz_vat_price()
+#
+# def zz_price_without():
+#     procent_price = (df.ZZ_PRICE_WITHOUT / 100 * 12)
+#     new_price = df.ZZ_PRICE_WITHOUT - procent_price
+#     return new_price
+# df['ZZ_PRICE_WITHOUT'] = zz_price_without()
+#
+# # df['ZZ_PRICE'] = df['ZZ_PRICE'].apply(lambda numbers: about_price(numbers))
+#
+#
+#
+#
+# # def pop():
+# #     return df.pop('TYPE')
+# #
+# # df['TYPE'] = pop()
+#
+# # def pop_second_db():
+# #     return new_db.pop('TYPE')
+# # df['TYPE'] = pop_second_db()
+#
+# df3 = df.merge(new_db, on='TYPE')
+# del df3['TYPE']
+#
+# df3 = df3.rename(columns={"ZZ_BRANCH": "МФО",
+#                    "ZZ_DEP_CLIENT": "Наименование клиента",
+#                    "ZZ_CONTRACT": "№ договора и дата",
+#                    "ZZ_CONT_END_DATE": "срок пользования от",
+#                    "ZZ_FROM_DATE": "срок пользования до",
+#                    "ZZ_PRICE_WITHOUT": "Сумма дохода банка",
+#                    "ZZ_VAT_PRICE": "НДС",
+#                    "ZZ_PRICE":"Сумма с учетом",
+#                    "ZZ_CONT_DATE": "срок пользования от",
+#                    "срок пользования от" : "срок пользования до"})
+# df3.insert(0, '#', range(1, 1 + len(df)))
+# print(df3)
+#
+# # writer = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
+# # сохранять в другую таблицу код снизу
+# # df3.to_excel('box.xlsx')
+#
+# # df3.to_excel('box4.xlsx', index = False)
+#
+# # df3.rename(columns={"ZZ_BRANCH": "МФО",
+# #                    "ZZ_DEP_CLIENT": "Наименование клиента",
+# #                    "ZZ_CONTRACT": "№ договора и дата",
+# #                    "ZZ_CONT_END_DATE": "срок пользования от",
+# #                    "ZZ_FROM_DATE": "срок пользования до",
+# #                    "ZZ_PRICE_WITHOUT": "Сумма дохода банка",
+# #                    "ZZ_VAT_PRICE": "НДС",
+# #                    "ZZ_PRICE":"Сумма с учетом",
+# #                    "ZZ_CONT_DATE": "срок пользования от",
+# #                    "срок пользования от" : "срок пользования до"})
+#
+#     # procent = df.ZZ_PRICE
+#     # procent_math = (procent/100 * 12)
+#
+#     # full_price = df.ZZ_PRICE
+#     # new_price = full_price - procent_math
+#
+#
