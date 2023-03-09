@@ -1,0 +1,48 @@
+import pandas as pd
+import  numpy as np
+from openpyxl.writer.excel import save_workbook
+import openpyxl
+from pandas.io.excel import ExcelWriter
+
+
+# По тому же исходнику сгруппируй по размеру ячейки общую сумму с учетем ндс.
+# Например,
+# 50 мм - 360000
+
+# 75 мм - 720000
+# И тд
+
+df = pd.read_excel('DATA2.xlsx', dtype={'ZZ_BRANCH': object,
+                                            'ZZ_FROM_DATE': object,
+                                                'ZZ_CONT_DATE': object,
+                                                    'ZZ_CONT_END_DATE': object})
+
+
+
+df = df.groupby('TYPE', as_index=False, sort=True).agg({'ZZ_PRICE':'sum'})
+
+df = df.rename(columns={"ZZ_BRANCH": "МФО",
+                   "ZZ_DEP_CLIENT": "Наименование клиента",
+                   "ZZ_CONTRACT": "ZZ_CONTRACT",
+                   "ZZ_CONT_END_DATE": "срок пользования до",
+                   "ZZ_PRICE_WITHOUT": "Сумма дохода банка",
+                   "ZZ_VAT_PRICE": "НДС",
+                   "ZZ_PRICE":"Сумма с учетом НДС",
+                   "ZZ_CONT_DATE": "срок пользования от"})
+
+new_db = pd.DataFrame({'TYPE': ['01','02','03','04','05','06','07'],
+                        'Pазмер ячейки (мм)': ['50 мм', '75 мм', '125 мм', '175 мм', '300 мм', '60 мм', '110 мм']})
+
+df = df.merge(new_db,  on='TYPE')
+del df['TYPE']
+del new_db['TYPE']
+
+
+with ExcelWriter('box7.xlsx', mode="a") as writer:
+    df.sample(10).to_excel(writer, sheet_name="Лист 1")
+    df.sample(10).to_excel(writer, sheet_name="Лист 2")
+
+
+print('done')
+
+
